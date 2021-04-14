@@ -135,14 +135,14 @@ namespace CoreConsoleTemplate
             }
             return result;
         }
-        public async Task<bool> CreateAsync(string sqlQuery, DynamicParameters param)
+        public async Task<bool> CreateAsync<T>(string sqlQuery, T data) where T:class
         {
             int result = -1;
             try
             {
                 using (IDbConnection con = new SqlConnection(GetConnectionString()))
                 {
-                    result = await con.ExecuteAsync(sqlQuery, param);
+                    result = await con.ExecuteAsync(sqlQuery, data);
                 }
             }
             catch (Exception ex)
@@ -152,14 +152,14 @@ namespace CoreConsoleTemplate
             return result > 0;
         }
 
-        public async Task<bool> UpdateAsync(string sqlQuery, DynamicParameters param)
+        public async Task<bool> UpdateAsync<T>(string sqlQuery, T data) where T : class
         {
             int result = -1;
             try
             {
                 using (IDbConnection con = new SqlConnection(GetConnectionString()))
                 {
-                    result = await con.ExecuteAsync(sqlQuery, param);
+                    result = await con.ExecuteAsync(sqlQuery, data);
                 }
             }
             catch (Exception ex)
@@ -168,14 +168,14 @@ namespace CoreConsoleTemplate
             }
             return result > 0;
         }
-        public async Task<bool> DeleteAsync(string sqlQuery, DynamicParameters param)
+        public async Task<bool> DeleteAsync<T>(string sqlQuery, T data) where T : class
         {
             int result = -1;
             try
             {
                 using (IDbConnection con = new SqlConnection(GetConnectionString()))
                 {
-                    result = await con.ExecuteAsync(sqlQuery, param);
+                    result = await con.ExecuteAsync(sqlQuery, data);
                 }
             }
             catch (Exception ex)
